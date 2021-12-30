@@ -93,6 +93,7 @@ select {
   letter-spacing: 1px;
   background-color: lightgrey;
   padding-left: 25px;
+  cursor: pointer;
 }
 
 select:focus {
