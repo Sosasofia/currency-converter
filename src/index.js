@@ -1,14 +1,12 @@
-/*https://api.frankfurter.app/latest */
-
 const currencyOneEl = document.getElementById("currency-one");
 const currencyTwoEl = document.getElementById("currency-two");
 const amountOneEl = document.getElementById("amount-one");
 const amountTwoEl = document.getElementById("amount-two");
 
-const BASE_URL = "https://api.frankfurter.app/latest";
+const BASE_URL = "https://api.exchangerate.host";
 
 function getCurrencies() {
-    return fetch(`${BASE_URL}`)
+    return fetch(`${BASE_URL}/latest`)
         .then((res) => res.json())
         .then((res) => displayCurrencies(res.rates))
 }
@@ -34,20 +32,21 @@ function convert() {
     let amount = amountOneEl.value;
 
     if(currencyOne != currencyTwo){
-       fetch(`${BASE_URL}?amount=${amount}&from=${currencyOne}&to=${currencyTwo}`)
+       fetch(`${BASE_URL}/convert?amount=${amount}&from=${currencyOne}&to=${currencyTwo}&places=2`)
         .then(resp => resp.json())
         .then((data) => {
-            amountTwoEl.value = Object.values(data.rates)[0];
+            amountTwoEl.value = data.result
         }); 
     } else {
         alert("Choose different currencies");
     }
+}
+
+
+const btn = document.getElementById("btn-convert");
+btn.addEventListener("click", convert);
+
+
+window.onload = function() {
+    getCurrencies();
 };
-
-
-
-const btn = document.getElementById('btn-convert');
-btn.addEventListener('click', convert);
-
-getCurrencies();
-
