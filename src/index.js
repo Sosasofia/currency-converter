@@ -31,15 +31,11 @@ function convert() {
     let currencyTwo = currencyTwoEl.value;
     let amount = amountOneEl.value;
 
-    if(currencyOne != currencyTwo){
-       fetch(`${BASE_URL}/convert?amount=${amount}&from=${currencyOne}&to=${currencyTwo}&places=2`)
-        .then(resp => resp.json())
-        .then((data) => {
-            amountTwoEl.value = data.result
-        }); 
-    } else {
-        alert("Choose different currencies");
-    }
+    fetch(`${BASE_URL}/convert?amount=${amount}&from=${currencyOne}&to=${currencyTwo}&places=2`)
+    .then(resp => resp.json())
+    .then((data) => {
+        amountTwoEl.value = data.result
+    });
 }
 
 
